@@ -1,6 +1,7 @@
 package com.example.notimdb.controller;
 
 import com.example.notimdb.pojo.dto.DirectorCreateRequest;
+import com.example.notimdb.pojo.dto.DirectorCreateRequest;
 import com.example.notimdb.pojo.entity.Director;
 import com.example.notimdb.pojo.entity.Movie;
 import com.example.notimdb.repository.DirectorRepository;
@@ -27,6 +28,7 @@ public class DirectorController {
 
     @PostMapping("/directors")
     public Director createDirector(@RequestBody DirectorCreateRequest newDirector) {
+
         Director director = new Director();
         director.setFirstName(newDirector.getFirstName());
         director.setLastName(newDirector.getLastName());

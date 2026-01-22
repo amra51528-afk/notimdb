@@ -1,13 +1,13 @@
-package com.example.notimdb.controller;
+package com.notimdb.notimdb.controller;
 
-import com.example.notimdb.pojo.dto.MovieCreateRequest;
-import com.example.notimdb.pojo.dto.MovieUpdateRequest;
-import com.example.notimdb.pojo.entity.*;
-import com.example.notimdb.repository.ActorRepository;
-import com.example.notimdb.repository.DirectorRepository;
-import com.example.notimdb.repository.GenreRepository;
-import com.example.notimdb.repository.ReviewRepository;
-import com.example.notimdb.service.MovieService;
+import com.notimdb.notimdb.pojo.dto.MovieCreateRequest;
+import com.notimdb.notimdb.pojo.dto.MovieUpdateRequest;
+import com.notimdb.notimdb.pojo.entity.*;
+import com.notimdb.notimdb.repository.ActorRepository;
+import com.notimdb.notimdb.repository.DirectorRepository;
+import com.notimdb.notimdb.repository.GenreRepository;
+import com.notimdb.notimdb.repository.ReviewRepository;
+import com.notimdb.notimdb.service.MovieService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -78,3 +78,4 @@ public class MovieController {
         return movieService.updateMovie(id, request);
     }
 }
+
