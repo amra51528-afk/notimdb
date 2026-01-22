@@ -1,4 +1,4 @@
-package com.example.notimdb;
+package com.notimdb.notimdb;
 
 
 import com.example.notimdb.pojo.entity.Director;
@@ -96,4 +96,3 @@ public class MovieTests {
 
 
 }
-
