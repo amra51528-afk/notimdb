@@ -19,8 +19,9 @@ public class DirectorController {
     public List<Director> getAllDirectors() {
         return (List<Director>) directorRepository.findAll();
     }
+
     @GetMapping("/directors/{id}")
-    public Director getDirectorById(@PathVariable Integer id){
+    public Director getDirectorById(@PathVariable Integer id) {
         return directorRepository.findById(id).orElse(null);
     }
 
@@ -33,10 +34,5 @@ public class DirectorController {
         director.setNationality(newDirector.getNationality());
 
         return directorRepository.save(director);
-    }
-
-    @GetMapping("directors/count")
-    public Long getTotalNrOfDirectors(){
-        return directorRepository.count();
     }
 }
