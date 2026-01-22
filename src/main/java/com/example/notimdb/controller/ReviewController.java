@@ -1,7 +1,6 @@
 package com.example.notimdb.controller;
 
 import com.example.notimdb.pojo.dto.CreateReviewRequest;
-import com.example.notimdb.pojo.entity.Director;
 import com.example.notimdb.pojo.entity.Movie;
 import com.example.notimdb.pojo.entity.Review;
 import com.example.notimdb.pojo.entity.User;

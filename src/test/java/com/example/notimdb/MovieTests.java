@@ -1,7 +1,6 @@
 package com.notimdb.notimdb;
 
 
-import com.example.notimdb.pojo.entity.Director;
 import com.example.notimdb.pojo.entity.Movie;
 import com.example.notimdb.repository.*;
 import com.example.notimdb.service.DefaultMovieService;
