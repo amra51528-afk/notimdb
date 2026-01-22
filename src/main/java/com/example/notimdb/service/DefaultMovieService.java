@@ -1,5 +1,6 @@
 package com.example.notimdb.service;
 
+import com.example.notimdb.DirectorNotFoundException;
 import com.example.notimdb.InvalidActorIdException;
 import com.example.notimdb.MovieNotFoundException;
 import com.example.notimdb.pojo.dto.MovieUpdateRequest;

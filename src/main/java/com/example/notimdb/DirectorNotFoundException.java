@@ -1,4 +1,4 @@
-package com.example.notimdb.service;
+package com.example.notimdb;
 
 public class DirectorNotFoundException extends IllegalArgumentException {
     public DirectorNotFoundException(String s) {
