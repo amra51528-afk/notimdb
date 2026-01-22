@@ -1,5 +1,6 @@
 package com.example.notimdb.controller;
 
+import com.example.notimdb.pojo.dto.ActorCreateRequest;
 import com.example.notimdb.pojo.entity.Actor;
 import com.example.notimdb.repository.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
