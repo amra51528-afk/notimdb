@@ -36,8 +36,12 @@ public class ActorController {
         return actorRepository.save(actor);
     }
 
+
     @GetMapping("actors/count")
     public Long getTotalNrOfActors(){
         return actorRepository.count();
     }
 }
+
+
+
