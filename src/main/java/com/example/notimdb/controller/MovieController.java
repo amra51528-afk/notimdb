@@ -26,21 +26,20 @@ public class MovieController {
     ReviewRepository reviewRepository;
 
     @Autowired
-    public MovieController(MovieService movieService, DirectorRepository directorRepository, GenreRepository genreRepository, ActorRepository actorRepository, ReviewRepository reviewRepository) {
+    public MovieController(MovieService movieService,DirectorRepository directorRepository,GenreRepository genreRepository,ActorRepository actorRepository,ReviewRepository reviewRepository) {
         this.movieService = movieService;
         this.directorRepository = directorRepository;
-        this.genreRepository = genreRepository;
-        this.actorRepository = actorRepository;
-        this.reviewRepository = reviewRepository;
+        this.genreRepository=genreRepository;
+        this.actorRepository=actorRepository;
+        this.reviewRepository=reviewRepository;
     }
 
     @GetMapping("/movies")
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
     }
-
     @GetMapping("/movies/{id}")
-    public Movie getMovieById(@PathVariable int id) {
+    public Movie getMovieById(@PathVariable int id){
         return movieService.getMovieById(id);
     }
 
@@ -56,26 +55,58 @@ public class MovieController {
         Director director = directorRepository.findById(newMovie.getDirectorId()).orElse(null);
         movie.setDirector(director);
         Set<Genre> genres = new HashSet<>();
-        for (Integer id : newMovie.getGenresIds()) {
+        for (Integer id:newMovie.getGenresIds()) {
             Genre genre = genreRepository.findById(id).orElse(null);
             genres.add(genre);
         }
         movie.setGenres(genres);
         Set<Actor> actors = new HashSet<>();
-        for (Integer id : newMovie.getActorsIds()) {
+        for (Integer id:newMovie.getActorsIds()) {
             Actor actor = actorRepository.findById(id).orElse(null);
             actors.add(actor);
         }
         movie.setActors(actors);
         return movieService.createMovie(movie);
     }
-
     @PutMapping("/movies/{id}")
     public Movie update(
             @PathVariable Integer id,
             @RequestBody MovieUpdateRequest request) {
 
-        return movieService.updateMovie(id, request);
+        return movieService.updateMovie(id,request);
+    }
+
+    @DeleteMapping("/movies/{id}")
+    public void deleteMovie(@PathVariable Integer id) {
+        movieService.deleteMovie(id);
+    }
+
+    @GetMapping("movies/actor/{id}")
+    public List<Movie> getMovieByActor(@PathVariable Integer id){
+        return movieService.getMovieByActor(id);
+    }
+
+    @GetMapping("movies/genre/{id}")
+    public List<Movie> getMoviesByGenre(@PathVariable Integer id){
+        return movieService.getMovieByGenre(id);
+    }
+
+    @GetMapping("movies/director/{id}")
+    public List<Movie> getMoviesByDirector(@PathVariable Integer id){
+        return movieService.getMovieByDirector(id);
+    }
+
+    @GetMapping(value = {"/movies/search","movies/search/{title}"})
+    public List<Movie> getMoviesByTitle(@PathVariable(required = false) String title){
+        return movieService.searchMovieByTitle(title);
+    }
+
+    @GetMapping("movies/count")
+    public Long getTotalNrOfMovies(){
+        return movieService.getTotalNrOfMovies();
+    }
+    @GetMapping(value = {"/movies/toprated","movies/toprated/{id}"})
+    public List<Movie> getTopRated(@PathVariable(required = false) Integer id){
+        return movieService.TopTenMovies(id);
     }
 }
-

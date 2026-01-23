@@ -19,7 +19,7 @@ public class GenreController {
     }
 
     @GetMapping("/genres/{id}")
-    public Genre getGenreById(@PathVariable Integer id) {
+    public Genre getGenreById(@PathVariable Integer id){
         return genreRepository.findById(id).orElse(null);
     }
 
@@ -28,5 +28,10 @@ public class GenreController {
         Genre genre = new Genre();
         genre.setName(newGenre.getName());
         return genreRepository.save(genre);
+    }
+
+    @GetMapping("genres/count")
+    public Long getTotalNrOfGenres(){
+        return genreRepository.count();
     }
 }
