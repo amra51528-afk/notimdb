@@ -1,4 +1,4 @@
-package com.notimdb.notimdb;
+package com.example.notimdb;
 
 
 import com.example.notimdb.pojo.entity.Movie;
