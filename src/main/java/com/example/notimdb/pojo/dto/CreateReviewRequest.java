@@ -17,6 +17,10 @@ public class CreateReviewRequest {
         this.userId = userId;
         this.movieId = movieId;
     }
+
+    public CreateReviewRequest(double v, String s, int i, int i1) {
+    }
+
     public Double getRating() {
         return rating;
     }

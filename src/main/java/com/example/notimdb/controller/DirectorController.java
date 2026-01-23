@@ -1,5 +1,6 @@
 package com.example.notimdb.controller;
 
+import com.example.notimdb.pojo.dto.DirectorCreateRequest;
 import com.example.notimdb.pojo.entity.Director;
 import com.example.notimdb.repository.DirectorRepository;
 import com.example.notimdb.service.MovieService;
