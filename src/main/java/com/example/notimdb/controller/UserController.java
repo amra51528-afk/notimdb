@@ -4,6 +4,9 @@ import com.example.notimdb.pojo.dto.CreateReviewFromUser;
 import com.example.notimdb.pojo.dto.CreateReviewRequest;
 import com.example.notimdb.pojo.dto.CreateUserRequest;
 import com.example.notimdb.pojo.entity.Movie;
+import com.example.notimdb.pojo.entity.Review;
+import com.example.notimdb.pojo.entity.User;
+import com.example.notimdb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
