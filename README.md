@@ -65,7 +65,7 @@ to open and run.
 ```properties
 server.port=8081
 
-spring.datasource.url=jdbc:mysql://localhost:8081/moviedb
+spring.datasource.url=jdbc:mysql://localhost:3037/moviedb
 spring.datasource.username=root
 
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
