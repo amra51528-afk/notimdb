@@ -5,7 +5,7 @@ This app is based on Springboot application with gradle.
 For this Java course we wanted to create something different, so we created this MovieApi called NotIMDb. More correctly an app from wich could be taken information about movies and their data such as director, actors, genres, reviews.
 <ul>
 <li>Movies - Where we register all movies.
-Data:(Title, Date, Description, Rating, Actors, Director, Genres, reviews)</li>
+Data:(Title, Date, Description, Rating, Actors, Director, Genres, also reviews)</li>
 <li>
 We can CRUD on all entities.
 </li>
