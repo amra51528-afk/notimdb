@@ -29,15 +29,13 @@ Search movie by title.
 <ul>
 <li>InteliJ IDEA.</li>
 <li>Java SE Development Kit.</li>
-<li>Insomnia (For testing apis)</li>
+<li>Postman (For testing apis)</li>
 <li>XAMPP (Apache server - that contains MariaDB, PHP)</li>
 </ul>
 
 <hr>
 <h3>Programming Languages used</h3>
 
-![Java](https://img.shields.io/badge/Language-Java-red)
-![SQL](https://img.shields.io/badge/Language-SQL-red)
 
 <hr>
 
@@ -45,13 +43,12 @@ Search movie by title.
 
 Once you clone this project from GitHub or download it in zip, then you need to unzip and open it, in your editor IntelliJ IDEA (make sure
 you click on TrustProject also after that let IntelliJ IDEA to install dependencies that we need
-to open and run.
+to open and run.)
 <hr>
 
 ### Technologies and APIs
-
-![Insomnia](https://img.shields.io/badge/Insomnia-2b0d63?style=for-the-badge&logo=insomnia&logoColor=white)   <p>Insomnia is an API platform for building and using APIs. Insomnia simplifies each step of the API lifecycle and streamlines collaboration so you can create better APIs—faster.</p>  <br>  
-![XAMPP](https://img.shields.io/badge/Xampp-F37623?style=for-the-badge&logo=xampp&logoColor=white)  <p>XAMPP is an abbreviation for cross-platform, and it allows you to build projects with API's offline, on a local web server on your computer. </p>
+<p>Postman is an API platform for building and using APIs. Postman simplifies each step of the API lifecycle and streamlines collaboration so you can create better APIs—faster.</p>  <br>  
+<p>XAMPP is an abbreviation for cross-platform, and it allows you to build projects with API's offline, on a local web server on your computer. </p>
 
 <hr>
 
@@ -63,63 +60,76 @@ to open and run.
 
 3.Also you need to check 'application.properties', for example ...
 
-```properties
+properties
 server.port=8081
 
 spring.datasource.url=jdbc:mysql://localhost:3307/moviedb
 spring.datasource.username=root
+spring.datasource.password=amra11/11a
 
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 spring.jpa.hibernate.ddl-auto=update
 
 spring.jpa.show-sql=true
-```
+
 
 ### Dependencies
 
-```java
+java
 plugins {
-  id 'java'
-  id 'org.springframework.boot' version '3.2.1'
-  id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+    id 'org.springframework.boot' version '3.5.9'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
-group = 'com.notimdb'
+group = 'com.example'
 version = '0.0.1-SNAPSHOT'
+description = 'Demo project; for Spring Boot'
 
 java {
-  sourceCompatibility = '17';
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21);
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor;
+    }
 }
 
 repositories {
-  mavenCentral();
+    mavenCentral();
 }
 
 dependencies {
-  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-  implementation 'org.springframework.boot:spring-boot-starter-web'
-  runtimeOnly 'com.mysql:mysql-connector-j'
-  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
-  useJUnitPlatform();
+    useJUnitPlatform()
 }
 
-```
+
 
 <hr>
 
 This Endpoint will help as get the list of all genres that are saved on our database
-```java
+java
  @GetMapping("/genres")
     public List<Genre> getAllGenres() {
         return (List<Genre>) genreRepository.findAll();
     }
-```
+
 
 TESTING API => getAllGenres();
-```json
+json
 [
 	{
 		"id": 1,
@@ -138,23 +148,23 @@ TESTING API => getAllGenres();
 		"name": "Sci-Fi"
 	}
 ]
-```
+
 <hr>
 This is the endpoint that we use to create a new genre and register it in our database
 
-```java
+java
  @PostMapping("/genres")
     public Genre createGenre(@RequestBody GenreCreateRequest newGenre) {
         Genre genre = new Genre();
         genre.setName(newGenre.getName());
         return genreRepository.save(genre);
     }
-```
+
 
 <hr>
 These are 2 more endpoints that we use: to find all genres and to find a genre by Id
 
-```java
+java
  @GetMapping("actors/count")
 public Long getTotalNrOfActors(){
         return actorRepository.count();
@@ -164,21 +174,21 @@ public Long getTotalNrOfActors(){
     public Genre getGenreById(@PathVariable Integer id){
         return genreRepository.findById(id).orElse(null);
     }
-```
+
 
 <hr>
 This Endpoint will help as get the list of all actores that are stored and registered on our database.
 
-```java
+java
 @GetMapping("/actors")
         public List<Actor> getAllActors() {
             return (List<Actor>) actorRepository.findAll();
         }
-```
+
 
 Testing API => GetAllActors();
 
-```json
+json
 [
 	{
 		"id": 1,
@@ -201,11 +211,11 @@ Testing API => GetAllActors();
 		"birthDate": "1982-01-03",
 		"nationality": "English"
     }]
-```
+
 <hr>
 This is the endpoint that we use to create new actors and save them in the database
 
-```java
+java
   @PostMapping("/actors")
         public Actor createActors(@RequestBody ActorCreateRequest newActor) {
             Actor actor = new Actor();
@@ -215,13 +225,13 @@ This is the endpoint that we use to create new actors and save them in the datab
             actor.setNationality(newActor.getNationality());
             return actorRepository.save(actor);
         }
-```
+
 
 <hr>
 
 And also the last 2 Actors Endpoints that we use to get actor by Id and get total number of actors
 
-```java
+java
  @GetMapping("actors/count")
     public Long getTotalNrOfActors(){
         return actorRepository.count();
@@ -231,13 +241,13 @@ And also the last 2 Actors Endpoints that we use to get actor by Id and get tota
         public Actor getActorById(@PathVariable Integer id){
             return actorRepository.findById(id).orElse(null);
         }
-```
+
 
 <hr>
 
 Now we continue with the directors. This is the endpoint that we use to create a new director and store it on our database
 
-```java
+java
 @PostMapping("/directors")
     public Director createDirector(@RequestBody DirectorCreateRequest newDirector) {
         Director director = new Director();
@@ -248,11 +258,11 @@ Now we continue with the directors. This is the endpoint that we use to create a
 
        return directorRepository.save(director);
     }
-```
+
 
 Testing API => GetAllDirectors();
 
-```json
+json
 [
 	{
 		"id": 1,
@@ -275,12 +285,12 @@ Testing API => GetAllDirectors();
 		"birthDate": "1972-02-03",
 		"nationality": "American"
 	}]
-```
+
 
 <hr>
 Here are the endpoints that we use to find all directors, find director by Id and get total nr of directors:
 
-```java
+java
   @GetMapping("/directors")
     public List<Director> getAllDirectors() {
         return (List<Director>) directorRepository.findAll();
@@ -293,14 +303,14 @@ Here are the endpoints that we use to find all directors, find director by Id an
     public Long getTotalNrOfDirectors(){
         return directorRepository.count();
     }
-```
+
 
 <hr>
 
 Now we continue with the users.
 These are the endpoints that we send to: create a new user, get all users, get user by Id and delete user:
 
-```java
+java
  @PostMapping("/users")
     public User createUser(@RequestBody CreateUserRequest newUserRequest) {
         User user = new User();
@@ -324,28 +334,28 @@ These are the endpoints that we send to: create a new user, get all users, get u
     public void deleteUser(@PathVariable Integer id) {
         userService.deleteUser(id);
     }
-```
+
 <hr>
 This is the endpoint that we use to add a review to a movie from an user. It contains the relationships: user-review and review-movie
 
-```java
+java
  @PostMapping("/users/movie/{id}")
     public Movie addMovieReview(@PathVariable Integer id, @RequestBody CreateReviewFromUser newReview) {
 
         return userService.addMovieReview(id,newReview);
     }
-```
+
 
 Testing API => addMovieReview();
-```json
+json
 {
 	"rating":7.7,
 	"comment":"Nice movie",
 	"userId":2
 }
-```
+
 Result:
-```json
+json
 {
 	"id": 1,
 	"title": "The Shawshank Redemption",
@@ -370,12 +380,12 @@ Result:
 		}
 	]
 }
-```
+
 
 <hr>
 And here are the endpoints we use to get All reviews and get Review by Id
 
-```java
+java
  @GetMapping("/reviews")
     public List<Review> getAllReviews() {
         return (List<Review>) reviewRepository.findAll();
@@ -384,10 +394,10 @@ And here are the endpoints we use to get All reviews and get Review by Id
     public Review getReviewById(@PathVariable Integer id){
         return reviewRepository.findById(id).orElse(null);
     }
-```
+
 
 Testing API => GetAllReviews();
-```json
+json
 [
 	{
 		"id": 1,
@@ -400,13 +410,13 @@ Testing API => GetAllReviews();
 		"comment": "Very funny movie"
 	}
 ]
-```
+
 <hr>
 Now we continue with the most important part, the movies:
 
 Here are the enpoints that we use to: getAllMovies, getMovieById, deleteMovie, getTotalNrOfMovies, and update Movie
 
-```java
+java
  @GetMapping("/movies")
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
@@ -434,11 +444,11 @@ public Movie update(
 
         return movieService.updateMovie(id,request);
         }
-```
+
 <hr>
 Below, you can find the endpoints: GetMovieByDirector, GetMovieByActor, GetMovieByGenre. In these endpoints are involved the relationships: movie-director, movie-actor, movie-genre
 
-```java
+java
   @GetMapping("movies/actor/{id}")
 public List<Movie> getMovieByActor(@PathVariable Integer id){
         return movieService.getMovieByActor(id);
@@ -453,21 +463,21 @@ public List<Movie> getMoviesByGenre(@PathVariable Integer id){
 public List<Movie> getMoviesByDirector(@PathVariable Integer id){
         return movieService.getMovieByDirector(id);
         }
-```
+
 
 <hr>
 This is the endpoint getMoviesByTitle: you can type the title and it will show up the movie
 
-```java
+java
  @GetMapping(value = {"/movies/search","movies/search/{title}"})
     public List<Movie> getMoviesByTitle(@PathVariable(required = false) String title){
         return movieService.searchMovieByTitle(title);
     }
-```
+
 
 Testing API => getMoviesByTitle
 http://localhost:8081/movies/search/Hangover
-```json
+json
 [
 	{
 		"id": 5,
@@ -496,22 +506,22 @@ http://localhost:8081/movies/search/Hangover
 		]
 	}
 ]
-```
+
 
 <hr>
 This is the endpoint to getTopRatedMovies, with or without Genre, it works with both
 
-```java
+java
   @GetMapping(value = {"/movies/toprated","movies/toprated/{id}"})
     public List<Movie> getTopRated(@PathVariable(required = false) Integer id){
         return movieService.TopTenMovies(id);
     }
-```
+
 
 Testing API => GetTopRatedMovies by Genre: Drama
 http://localhost:8081/movies/toprated/3
 
-```json
+json
 [
 	{
 		"id": 2,
@@ -630,7 +640,7 @@ http://localhost:8081/movies/toprated/3
 		]
 	}
 ]
-```
+
 <hr>
 
 ### Bugs and Features Requests
@@ -638,4 +648,3 @@ http://localhost:8081/movies/toprated/3
 aa31711@seeu.edu.mk
 
 eh31893@seeu.edu.mk
-
